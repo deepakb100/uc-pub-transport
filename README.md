@@ -207,10 +207,10 @@ However, when you are ready to verify the end-to-end system prior to submission,
 Once the simulation is running, you may hit `Ctrl+C` at any time to exit.
 
 #### To run the Faust Stream Processing Application:
-1. `cd consumers`
-2. `virtualenv venv`
+1. `cd consumers`    -> python3 -m venv .venv
+2. `virtualenv venv` -> source .venv/bin/activate            deactivate
 3. `. venv/bin/activate`
-4. `pip install -r requirements.txt`
+4. `pip3 install -r requirements.txt`
 5. `faust -A faust_stream worker -l info`
 
 
