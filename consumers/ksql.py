@@ -22,9 +22,11 @@ KSQL_URL = "http://localhost:8088"
 #       Make sure to set the value format to JSON
 
 KSQL_STATEMENT = """
-CREATE STREAM ksql_turnstile (station_id INT, station_name VARCHAR, type VARCHAR)
+
+CREATE stream ksql_turnstile 
   WITH (KAFKA_TOPIC='station_turnstile',
-        VALUE_FORMAT='avro');
+        VALUE_FORMAT='AVRO') ;
+
 
 CREATE TABLE turnstile_summary WITH  (VALUE_FORMAT='JSON')  AS
     SELECT STATION_ID, AS_VALUE(STATION_ID) as SID, COUNT(STATION_ID)  As Count

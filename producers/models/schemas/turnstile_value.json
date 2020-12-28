@@ -3,10 +3,8 @@
   "name": "turnstile_event",
   "namespace": "com.udacity",
   "fields": [
-    {"name": "station_id", "type": "int"},
+    {"name": "station_id", "type": "string"},
     {"name": "station_name", "type": "string"},
-    {"name": "line", "type": "string"},
-    {"name": "num_entries", "type": "int"}
-    
+    {"name": "line", "type": "string"}   
   ]
 }

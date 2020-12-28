@@ -67,7 +67,7 @@ class Line:
             self._handle_arrival(message)
         elif "TURNSTILE_SUMMARY" == message.topic(): # Set the conditional to the KSQL Turnstile Summary Topic
             json_data = json.loads(message.value())
-            station_id = json_data.get("SID")
+            station_id = int(json_data.get("SID"))
             station = self.stations.get(station_id)
             if station is None:
                 logger.debug("unable to handle message due to missing station")
