@@ -23,15 +23,21 @@ KSQL_URL = "http://localhost:8088"
 
 KSQL_STATEMENT = """
 
-CREATE stream ksql_turnstile 
-  WITH (KAFKA_TOPIC='station_turnstile',
-        VALUE_FORMAT='AVRO') ;
 
+CREATE TABLE ksql_turnstile (
+    station_id VARCHAR PRIMARY KEY,
+    station_name VARCHAR,
+    line VARCHAR
+) WITH (
+    KAFKA_TOPIC='station_turnstile',
+    VALUE_FORMAT='AVRO'
+);
 
-CREATE TABLE turnstile_summary WITH  (VALUE_FORMAT='JSON')  AS
-    SELECT STATION_ID, AS_VALUE(STATION_ID) as SID, COUNT(STATION_ID)  As Count
-        FROM ksql_turnstile 
-        GROUP BY STATION_ID EMIT CHANGES;
+CREATE TABLE turnstile_summary
+    WITH (VALUE_FORMAT='JSON') AS
+        SELECT station_id, SUM(1) AS count
+        FROM ksql_turnstile
+        GROUP BY station_id;
 
 """
 
